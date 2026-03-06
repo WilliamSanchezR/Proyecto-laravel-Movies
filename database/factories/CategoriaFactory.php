@@ -2,22 +2,27 @@
 
 namespace Database\Factories;
 
+use App\Models\categorias;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\categorias>
- */
 class CategoriaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = categorias::class;
+
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('es_ES');
+        
+        $categorias = [
+            'Acción', 'Aventura', 'Ciencia Ficción', 'Comedia', 'Drama',
+            'Terror', 'Suspense', 'Romance', 'Animación', 'Documental',
+            'Fantasía', 'Crimen', 'Misterio', 'Musical', 'Western'
+        ];
+        
         return [
-            //
+            'nombre' => $faker->unique()->randomElement($categorias),
+            'descripcion' => $faker->sentence(),
+            'activo' => $faker->boolean(80),
         ];
     }
 }
