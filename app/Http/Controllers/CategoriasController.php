@@ -43,25 +43,25 @@ class CategoriasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(categorias $categorias)
+    public function show(categorias $categoria)
     {
-        $peliculas = peliculas::where('categoria_id', $categorias->id)->get();
-        return view('categorias.show', compact('categorias', 'peliculas'));
+        $peliculas = peliculas::where('categoria_id', $categoria->id)->get();
+        return view('categorias.show', compact('categoria', 'peliculas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(categorias $categorias)
+    public function edit(categorias $categoria)
     {
-        $peliculas = peliculas::where('categoria_id', $categorias->id)->get();
-        return view('categorias.edit', compact('categorias', 'peliculas'));
+        $peliculas = peliculas::where('categoria_id', $categoria->id)->get();
+        return view('categorias.edit', compact('categoria', 'peliculas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, categorias $categorias)
+    public function update(Request $request, categorias $categoria)
     {
         $request->validate([
             'nombre' => 'required',
@@ -69,16 +69,16 @@ class CategoriasController extends Controller
             'activo' => 'required|boolean',
         ]);
 
-        $categorias->update($request->all());
+        $categoria->update($request->all());
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(categorias $categorias)
+    public function destroy(categorias $categoria)
     {
-        $categorias->delete();
+        $categoria->delete();
         return redirect()->route('categorias.index')->with('success', 'Categoría eliminada exitosamente.');
     }
 }
